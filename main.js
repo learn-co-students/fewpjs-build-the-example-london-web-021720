@@ -2,9 +2,22 @@
 const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
+document.addEventListener('DOMContentLoaded', (event) => {
+const clickFunc = document.querySelector(".like")
+
 // Your JavaScript code goes here!
-
-
+clickFunc.addEventListener("click", event => { 
+    // mimicServerCall()
+  fetch("http://mimicServer.example.com")
+    .then(mimicServerCall => { 
+      
+       mimicServerCall.json();
+    } )
+    .then((data) => {
+      console.log(data);
+})
+})
+})
 
 
 //------------------------------------------------------------------------------
