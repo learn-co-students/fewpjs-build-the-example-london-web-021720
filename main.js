@@ -3,18 +3,39 @@ const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
 document.addEventListener('DOMContentLoaded', (event) => {
-const clickFunc = document.querySelector(".like")
+
+  let clickFunc = document.querySelectorAll(".like")
+// let heart = document.querySelectorAll(".like-glyph")
+let errorArea = document.querySelector("#modal")
+let pTag = errorArea.querySelector("p")
+
 
 // Your JavaScript code goes here!
-clickFunc.addEventListener("click", event => { 
-    // mimicServerCall()
-  fetch("http://mimicServer.example.com")
-    .then(mimicServerCall => { 
-      
-       mimicServerCall.json();
-    } )
-    .then((data) => {
-      console.log(data);
+clickFunc.forEach(list => {
+  const heart = list.querySelector(".like-glyph")
+  list.addEventListener("click", event => { 
+  
+  mimicServerCall("http://mimicServer.example.com")
+    .then(response => { 
+      console.log(response)
+
+       
+        if (heart.innerHTML === EMPTY_HEART) {
+        heart.innerHTML = FULL_HEART
+        }
+        else {
+       
+          heart.innerHTML = EMPTY_HEART
+         
+      }
+  
+  })
+    .catch(error =>  {
+      errorArea.classList.remove("hidden");
+      pTag.innerHTML = error
+     setTimeout(() => {errorArea.classList.add("hidden")},5000)
+       
+    })
 })
 })
 })
